@@ -1,0 +1,64 @@
+{%extends 'base.html'%}
+{%block content%}
+<h1>Изменить профиль</h1>
+<form action ="" method = "POST" enctype="multipart/form-data">
+    {{form.hidden_tag()}}
+    <fieldset class="form-group">
+        <div class ="form-group">
+            {{form.username.label(class="form-control-label")}}
+            {% if form.username.errors %}
+                {{ form.username(class="form-control form-control-lg is-invalid", value=username)}}
+            <div class="invalid-feedback">
+                {% for error in form.username.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+                {{ form.username(class="form-control form-control-lg", value=username) }}
+            {% endif %}
+        </div>
+        <div class ="form-group">
+            {{form.email.label(class="form-control-label")}}
+            {% if form.email.errors %}
+                {{ form.email(class="form-control form-control-lg is-invalid", value=email)}}
+            <div class="invalid-feedback">
+                {% for error in form.email.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+                {{ form.email(class="form-control form-control-lg", value=email) }}
+            {% endif %}
+        </div>
+        <div class ="form-group">
+            {{form.about.label(class="form-control-label")}}
+            {% if form.about.errors %}
+                {{ form.about(class="form-control form-control-lg is-invalid", value=about)}}
+            <div class="invalid-feedback">
+                {% for error in form.about.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+                {{ form.about(class="form-control form-control-lg", value=about) }}
+            {% endif %}
+        </div>
+        <div class ="form-group">
+            {{form.profile_image.label(class="form-control-label")}}
+            {% if form.profile_image.errors %}
+                {{ form.profile_image(class="form-control form-control-lg is-invalid", value=image)}}
+            <div class="invalid-feedback">
+                {% for error in form.profile_image.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+                {{ form.profile_image(class="form-control form-control-lg", value=image) }}
+            {% endif %}
+        </div>
+    </fieldset>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-outline-info") }}
+    </div>
+</form>
+{%endblock content%}

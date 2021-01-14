@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container bg-white text-dark mt-3 mb-3 p-2 pb-0 border border-dark border-1 rounded">
+<h1 class="text-center">ЛЕНТА</h1>
+</div>
+
+<div class="row">
+    <div class="col-8">
+        {% for post in posts %}
+            {% include '_post.html' %}
+        {% endfor %}
+    </div>
+    
+    <div class="col-4">
+        <div class="container bg-white text-dark mt-3 mb-3 p-4 border border-dark border-1 rounded md-auto">
+            <h4>Подписки - {{user.followed.count()}}</h4>
+            {% for fol in followed%}
+                <a  href="{{url_for('users.profile', username=fol.username)}}">{{ fol.username }}</a>
+                <img class="rounded-circle img-fluid", style="width: 30px; height: 30px" src="{{url_for('static', filename='profile_pics/' + fol.profile_image)}}"><br>
+            {%endfor%}
+            <h4>Подписчики - {{user.followers.count()}}</h4>
+            {% for fol in followers%}
+                <a  href="{{url_for('users.profile', username=fol.username)}}">{{ fol.username }}</a>
+                <img class="rounded-circle img-fluid", style="width: 30px; height: 30px" src="{{url_for('static', filename='profile_pics/' + fol.profile_image)}}"><br>
+            {%endfor%}
+            <div class="btn-group mt-3">
+                    <a href="{{url_for('main.blog')}}" class="btn btn-primary pl-4 pr-4">Все</a>
+                    <a href="{{url_for('main.blog_sorted')}}"class="btn btn-primary">Подписки</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include '_pagination.html'%}
+{% endblock content %}

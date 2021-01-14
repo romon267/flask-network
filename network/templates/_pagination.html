@@ -1,0 +1,23 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if prev_url %}
+    <li class="page-item">
+      <a class="page-link" href="{{prev_url}}">Посты новее</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" href="{{prev_url}}" tabindex="-1" aria-disabled="true">Посты новее</a>
+    </li>
+    {% endif %}
+    <li class="page-item"><a class="page-link" href="#">Наверх</a></li>
+    {% if next_url %}
+    <li class="page-item">
+      <a class="page-link" href="{{next_url}}">Посты старее</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" href="{{next_url}}" tabindex="-1" aria-disabled="true">Посты старее</a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>

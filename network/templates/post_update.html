@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content%}
+<div class="container mb-3 bg-light text-dark mt-3 p-4 border border-dark border-1 rounded">
+    <h3>Изменить пост</h3>
+    <form action="" method="post" enctype="multipart/form-data">
+    {{form.hidden_tag()}}
+        <fieldset class="form-group">
+            <div class ="form-group">
+                {{form.title.label(class="form-control-label")}}
+                {% if form.title.errors %}
+                    {{ form.title(class="form-control form-control-lg is-invalid",)}}
+                <div class="invalid-feedback">
+                    {% for error in form.title.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    {{ form.title(class="form-control form-control-lg",) }}
+                {% endif %}
+            </div>
+            <div class ="form-group mb-2">
+                {{form.content.label(class="form-control-label")}}
+                {% if form.content.errors %}
+                    {{ form.content(class="form-control form-control-lg is-invalid", id="floatingTextarea2", style="height: 100px")}}
+                <div class="invalid-feedback">
+                    {% for error in form.content.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    {{ form.content(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class ="form-group">
+            {{form.post_image.label(class="form-control-label")}}
+            {% if form.post_image.errors %}
+                {{ form.post_image(class="form-control form-control-lg is-invalid",)}}
+            <div class="invalid-feedback">
+                {% for error in form.post_image.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+                {{ form.post_image(class="form-control form-control-lg")}}
+            {% endif %}
+        </div>
+        </fieldset>
+        
+            <div class="form-group mt-3 col">
+                {{ form.submit(class="btn btn-outline-info") }}
+            
+            
+        </div>
+    </form>
+    <div class="col d-grid gap-2 d-md-flex justify-content-md-end align-items-center">
+                <button class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#deleteModal" >Удалить</button>
+    </div>
+    
+    
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Удалить пост</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Вы уверены что хотите удалить пост?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+        <form action="{{url_for('posts.post_delete', post_id=post.id)}}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Удалить">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content%}
